@@ -18,9 +18,7 @@ loader.style.visibility = 'visible'
     return response.json();
 })
 .then(data => {
-    console.log("get:" , data);
-    setTimeout(() => {
-        
+    console.log("get:" , data); 
         if (data.hits.length === 0){
             iziToast.show({
                 messageColor: 'white',
@@ -40,10 +38,16 @@ loader.style.visibility = 'visible'
         
         lightbox.refresh();
 
-        loader.style.visibility = 'hidden'
-    }, 2000);
+        loader.style.visibility = 'hidden';
 })
-.catch(error => console.error(error))
+.catch(error =>  iziToast.show({
+                messageColor: 'white',
+                backgroundColor: 'red',
+                position: 'topRight',
+                close: true,
+                title: `${error}`,
+                message: 'Sorry, there are no images matching your search query. Please try again!'
+            }))
 .finally(() => form.reset())
 
 }

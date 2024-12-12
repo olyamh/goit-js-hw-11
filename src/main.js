@@ -1,4 +1,5 @@
-
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 import { pixabayApi } from "./js/pixabay-api";
 import { gallery } from "./js/pixabay-api";
 import { loader } from "./js/pixabay-api";
@@ -25,6 +26,19 @@ form.addEventListener("submit", function(event) {
          
             const input = event.target.querySelector('.search-input');
             const clientInput  = input.value.trim();
+            console.log("input-trim:", clientInput);
+            if (!clientInput){
+                iziToast.show({
+                    messageColor: 'white',
+                    backgroundColor: 'red',
+                    position: 'topRight',
+                    close: true,
+                    title: ``,
+                    message: 'Please, enter text'
+                });
+                form.reset();
+                return;
+            }
            
             console.log("input:", clientInput);
             params.set('q', clientInput);
